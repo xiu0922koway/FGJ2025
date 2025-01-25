@@ -109,7 +109,11 @@ public class BubbleController : MonoBehaviour
         }
         else
         {   
-            if(bubble.transform.localScale.magnitude > instructor.localScale.magnitude + bubbleEndSizeDelta)
+            if(leftTriggerValue <= 0 && rightTriggerValue <= 0)
+            {
+                BubbleGenerate();
+            }        
+            else if(bubble.transform.localScale.magnitude > instructor.localScale.magnitude + bubbleEndSizeDelta)
             {
                 BubblePop();
             }
