@@ -16,7 +16,7 @@ public class Bubble : MonoBehaviour
     {
         if(isGenerated)
         {
-            this.transform.position += Vector3.up * 0.6f * Time.deltaTime;
+            this.transform.position += Vector3.up * 1.5f * Time.deltaTime;
         }
     }
 }
