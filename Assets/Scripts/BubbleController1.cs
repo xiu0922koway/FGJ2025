@@ -21,16 +21,12 @@ public class BubbleController1 : MonoBehaviour
     public float slowSpeed = 20;
     public float maxSpeed = 5;
     public float blowDelta;
-    public float inputValue;
+    public float leftPreviousValue;
+    public float rightPreviousValue;
     private float sizeDelta;
     public float sizeMultiplier = 1;
-
-    public float bubbleEndSizeDelta = 0.5f;
-
-    public bool bubbleEnd;
     public bool startBlow;
     public bool isBlowing;
-    public bool isBreathing;
 
     private bool willGenerate;
     private float generateTimer;
@@ -76,31 +72,83 @@ public class BubbleController1 : MonoBehaviour
         }
     }
 
+    private float safeBlowTime = 1;
+    private float safeBlowTimer;
+    private bool canEnd;
     void Update()
     {
-        if((rightTriggerValue + leftTriggerValue)/2 > 0)
+        if(willGenerate)
         {
-            startBlow = true;
-        }
-
-        if(startBlow)
-        {
-            CheckBlow();
-            if(isBlowing)
+            if(generateTimer < generateTime)
             {
-                BlowBubble();
+                generateTimer += Time.deltaTime;
             }
             else
             {
-                BreatheIn();
+                generateTimer = 0;
+                bubble = Instantiate(bubblePrefab,Vector3.zero,Quaternion.identity);
+                willGenerate = false;
+                ResetField();
+            }
+        }
+        else
+        {
+            if((rightTriggerValue + leftTriggerValue)/2 > 0)
+            {
+                startBlow = true;
+                isBlowing = true;
+            }
+
+            if(startBlow)
+            {
+                if(safeBlowTimer < safeBlowTime)
+                {
+                    safeBlowTimer += Time.deltaTime;
+                }
+                else
+                {
+                    canEnd = true;
+                }
+                
+                if(CheckBlow()) return;
+                if(isBlowing)
+                {
+                    BlowBubble();
+                }
+                else
+                {
+                    BreatheIn();
+                }
             }
         }
     }
 
-    void CheckBlow()
+    bool CheckBlow()
     {
         
-        if((leftTriggerValue) > inputValue)
+        if(Mathf.Max(leftTriggerValue, rightTriggerValue) == 1)
+        {
+            if(canEnd)
+            {
+                BubblePop();
+                return true;
+            }
+            
+
+        }
+        if(!isBlowing && leftTriggerValue == 0)
+        {
+            BubbleGenerate();
+            return true;
+        }
+        if(!isBlowing && rightTriggerValue == 0)
+        {
+            BubbleGenerate();
+            return true;
+        }
+
+
+        if(leftTriggerValue > leftPreviousValue && rightTriggerValue > rightPreviousValue)
         {
             isBlowing = true;
         }
@@ -109,14 +157,18 @@ public class BubbleController1 : MonoBehaviour
             isBlowing = false;
         }
 
-        inputValue = leftTriggerValue;
+
+        leftPreviousValue = leftTriggerValue;
+        rightPreviousValue = rightTriggerValue;
+
+        return false;
     }
 
     void BlowBubble()
     {
         Debug.Log("Blow");
         
-        blowDelta += blowSpeed * leftTriggerValue;
+        blowDelta += blowSpeed * (leftTriggerValue + rightTriggerValue)/2;
         blowDelta = Mathf.Clamp(blowDelta, 0, maxSpeed);
 
         sizeDelta = sizeMultiplier / Mathf.Pow(bubble.transform.localScale.x,0);
@@ -130,7 +182,7 @@ public class BubbleController1 : MonoBehaviour
         Debug.Log("BREATHIN");
         
         blowDelta -= slowSpeed * Time.deltaTime;
-        blowDelta = Mathf.Clamp(blowDelta, -0.025f * maxSpeed, maxSpeed);
+        blowDelta = Mathf.Clamp(blowDelta, -0.01f * maxSpeed, maxSpeed);
 
         sizeDelta = sizeMultiplier / Mathf.Pow(bubble.transform.localScale.x,0);
         sizeDelta = Mathf.Clamp(sizeDelta, 0.1f, 1);
@@ -156,5 +208,12 @@ public class BubbleController1 : MonoBehaviour
         bubble = null;
 
         willGenerate = true;
+    }
+
+    void ResetField()
+    {
+        canEnd = false;
+        safeBlowTimer = 0;
+        blowDelta = 0;
     }
 }
