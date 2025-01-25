@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Rendering;
 using UnityEngine;
 using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.InputSystem;
 
-public class BubbleController : MonoBehaviour
+public class BubbleController1 : MonoBehaviour
 {
     private GameObject bubble;
     public GameObject bubblePrefab;
@@ -20,14 +21,16 @@ public class BubbleController : MonoBehaviour
     public float slowSpeed = 20;
     public float maxSpeed = 5;
     public float blowDelta;
-    private float inputValue;
+    public float inputValue;
     private float sizeDelta;
     public float sizeMultiplier = 1;
 
     public float bubbleEndSizeDelta = 0.5f;
 
     public bool bubbleEnd;
+    public bool startBlow;
     public bool isBlowing;
+    public bool isBreathing;
 
     private bool willGenerate;
     private float generateTimer;
@@ -75,94 +78,83 @@ public class BubbleController : MonoBehaviour
 
     void Update()
     {
-        if(willGenerate)
+        if((rightTriggerValue + leftTriggerValue)/2 > 0)
         {
-            if(generateTimer < generateTime)
+            startBlow = true;
+        }
+
+        if(startBlow)
+        {
+            CheckBlow();
+            if(isBlowing)
             {
-                generateTimer += Time.deltaTime;
+                BlowBubble();
             }
             else
             {
-                generateTimer = 0;
-                bubble = Instantiate(bubblePrefab,Vector3.zero,Quaternion.identity);
-                willGenerate = false;
-            }
-        }
-        else
-        {
-            CheckBubbleEnd();
-            if(isBlowing)
-            {
-                BubbleSizeControl();
+                BreatheIn();
             }
         }
     }
 
-    void CheckBubbleEnd()
+    void CheckBlow()
     {
-        if(!isBlowing)
-        {
-            if(leftTriggerValue > 0 || rightTriggerValue > 0)
-            {
-                isBlowing = true;
-            }
-        }
-        else
-        {   
-            if(leftTriggerValue <= 0 && rightTriggerValue <= 0)
-            {
-                BubbleGenerate();
-            }        
-            else if(bubble.transform.localScale.magnitude > instructor.localScale.magnitude + bubbleEndSizeDelta)
-            {
-                BubblePop();
-            }
-            else if(bubble.transform.localScale.magnitude < instructor.localScale.magnitude - 2* bubbleEndSizeDelta)
-            {
-                BubbleGenerate();
-            }
-        }
-    }
-
-    void BubblePop()
-    {
-        Debug.Log("Pop");
-        isBlowing = false;
-        Destroy(bubble);
-        bubble = null;
-
-        BubbleInstruction.Instance.Reset();
-        willGenerate = true;
-    }
-    void BubbleGenerate()
-    {
-        Debug.Log("Generate");
-        isBlowing = false;
-        bubble.GetComponent<Bubble>().isGenerated = true;
-        bubble = null;
-
-        BubbleInstruction.Instance.Reset();
-        willGenerate = true;
-    }
-
-    void BubbleSizeControl()
-    {
-        inputValue = (leftTriggerValue + rightTriggerValue)/2;
         
-        if(inputValue == 0)
+        if((leftTriggerValue) > inputValue)
         {
-            blowDelta -= slowSpeed * Time.deltaTime;
+            isBlowing = true;
         }
         else
         {
-            blowDelta += blowSpeed * inputValue;
-            BubbleInstruction.Instance.isBlowing = true;
+            isBlowing = false;
         }
+
+        inputValue = leftTriggerValue;
+    }
+
+    void BlowBubble()
+    {
+        Debug.Log("Blow");
+        
+        blowDelta += blowSpeed * leftTriggerValue;
         blowDelta = Mathf.Clamp(blowDelta, 0, maxSpeed);
 
         sizeDelta = sizeMultiplier / Mathf.Pow(bubble.transform.localScale.x,0);
         sizeDelta = Mathf.Clamp(sizeDelta, 0.1f, 1);
         
         bubble.transform.localScale += Vector3.one * blowDelta * sizeDelta * Time.deltaTime;
+    }
+
+    void BreatheIn()
+    {
+        Debug.Log("BREATHIN");
+        
+        blowDelta -= slowSpeed * Time.deltaTime;
+        blowDelta = Mathf.Clamp(blowDelta, -0.025f * maxSpeed, maxSpeed);
+
+        sizeDelta = sizeMultiplier / Mathf.Pow(bubble.transform.localScale.x,0);
+        sizeDelta = Mathf.Clamp(sizeDelta, 0.1f, 1);
+
+        bubble.transform.localScale += Vector3.one * blowDelta * sizeDelta * Time.deltaTime;
+    }
+
+    void BubblePop()
+    {
+        Debug.Log("Pop");
+        startBlow = false;
+        Destroy(bubble);
+        bubble = null;
+
+        willGenerate = true;
+    }
+
+    void BubbleGenerate()
+    {
+        Debug.Log("Generate");
+        startBlow = false;
+        bubble.GetComponent<Bubble>().isGenerated = true;
+        bubble = null;
+
+        willGenerate = true;
     }
 }

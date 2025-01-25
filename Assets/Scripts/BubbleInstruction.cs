@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class BubbleInstruction : Singleton<BubbleInstruction>
 {
-    public AnimationCurve inputCurve;
-    public float duration = 3;
+    public List<float> sizeIndicator;
 
     public Transform instructor;
     public bool isBlowing;
@@ -24,11 +23,6 @@ public class BubbleInstruction : Singleton<BubbleInstruction>
 
     void Update()
     {
-        if(isBlowing)
-        {
-            instructor.localScale += Vector3.one * inputCurve.Evaluate(blowTimer/duration) * Time.deltaTime;
-            blowTimer += Time.deltaTime;
-        }
 
     }
 
