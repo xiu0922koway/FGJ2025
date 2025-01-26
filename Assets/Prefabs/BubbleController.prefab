@@ -1,0 +1,109 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &5893930671702791323
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7215292337064688305}
+  - component: {fileID: 8611499753667430401}
+  - component: {fileID: 1300478023866747421}
+  - component: {fileID: 4370894221588461750}
+  m_Layer: 0
+  m_Name: BubbleController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7215292337064688305
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5893930671702791323}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 1
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8611499753667430401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5893930671702791323}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ae93dae2a4c0ab4788ffd335ec5d26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubblePrefab: {fileID: 557521030734977017, guid: 39530e144dd1db948a1863055f7176a3,
+    type: 3}
+  leftTriggerValue: 0
+  rightTriggerValue: 0
+  blowSpeed: 0.1
+  slowSpeed: 20
+  maxSpeed: 2
+  blowDelta: 0
+  sizeMultiplier: 1
+  bubbleEndSizeDelta: 0.5
+  bubbleEnd: 0
+  isBlowing: 0
+--- !u!114 &1300478023866747421
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5893930671702791323}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a5fdcda455a5c7459a538811f66f4d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sizeIndicator:
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  instructor: {fileID: 0}
+  isBlowing: 0
+  blowTimer: 0
+  size: 0
+--- !u!114 &4370894221588461750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5893930671702791323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0eeebe59164dde4bb1503e56a59c5bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bubblePrefab: {fileID: 557521030734977017, guid: 39530e144dd1db948a1863055f7176a3,
+    type: 3}
+  leftTriggerValue: 0
+  rightTriggerValue: 0
+  blowSpeed: 2
+  slowSpeed: 10
+  maxSpeed: 4
+  blowDelta: 0
+  leftPreviousValue: 0
+  rightPreviousValue: 0
+  sizeMultiplier: 1
+  startBlow: 0
+  isBlowing: 0

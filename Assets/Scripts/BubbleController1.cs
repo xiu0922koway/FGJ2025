@@ -184,7 +184,7 @@ public class BubbleController1 : MonoBehaviour
         blowDelta -= slowSpeed * Time.deltaTime;
         blowDelta = Mathf.Clamp(blowDelta, -0.01f * maxSpeed, maxSpeed);
 
-        sizeDelta = sizeMultiplier / Mathf.Pow(bubble.transform.localScale.x,0);
+        sizeDelta = sizeMultiplier / Mathf.Pow(bubble.transform.localScale.x,1.5f);
         sizeDelta = Mathf.Clamp(sizeDelta, 0.1f, 1);
 
         bubble.transform.localScale += Vector3.one * blowDelta * sizeDelta * Time.deltaTime;
@@ -198,6 +198,7 @@ public class BubbleController1 : MonoBehaviour
         bubble = null;
 
         willGenerate = true;
+        CalculateScore();
     }
 
     void BubbleGenerate()
@@ -208,6 +209,7 @@ public class BubbleController1 : MonoBehaviour
         bubble = null;
 
         willGenerate = true;
+        CalculateScore();
     }
 
     void ResetField()
@@ -215,5 +217,10 @@ public class BubbleController1 : MonoBehaviour
         canEnd = false;
         safeBlowTimer = 0;
         blowDelta = 0;
+    }
+
+    void CalculateScore()
+    {
+        ScoreManager.Instance.playerScore = bubble.transform.localScale.magnitude;
     }
 }
