@@ -522,6 +522,16 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5314366349198256215, guid: 2668f0c5acd0132458e7d74f3e3d0b24,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 21
+      objectReference: {fileID: 0}
+    - target: {fileID: 5314366349198256215, guid: 2668f0c5acd0132458e7d74f3e3d0b24,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -91.002
+      objectReference: {fileID: 0}
     - target: {fileID: 6235828847128275168, guid: 2668f0c5acd0132458e7d74f3e3d0b24,
         type: 3}
       propertyPath: m_AnchorMax.y
@@ -688,17 +698,43 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8079887616221735277, guid: 2668f0c5acd0132458e7d74f3e3d0b24,
+        type: 3}
+      propertyPath: m_Color.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8079887616221735277, guid: 2668f0c5acd0132458e7d74f3e3d0b24,
+        type: 3}
+      propertyPath: m_Color.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8079887616221735277, guid: 2668f0c5acd0132458e7d74f3e3d0b24,
+        type: 3}
+      propertyPath: m_Color.r
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8079887616221735277, guid: 2668f0c5acd0132458e7d74f3e3d0b24,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8452874149467229569, guid: 2668f0c5acd0132458e7d74f3e3d0b24,
         type: 3}
       propertyPath: m_fontAsset
       value: 
-      objectReference: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee,
+      objectReference: {fileID: 11400000, guid: b29812c1922c85b4a9e66b44e60cae99,
         type: 2}
     - target: {fileID: 8452874149467229569, guid: 2668f0c5acd0132458e7d74f3e3d0b24,
         type: 3}
       propertyPath: m_sharedMaterial
       value: 
-      objectReference: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+      objectReference: {fileID: -8080280342387913867, guid: b29812c1922c85b4a9e66b44e60cae99,
+        type: 2}
+    - target: {fileID: 8452874149467229569, guid: 2668f0c5acd0132458e7d74f3e3d0b24,
+        type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -18317,8 +18353,8 @@ SceneRoots:
   m_Roots:
   - {fileID: 2348266227775450773}
   - {fileID: 2033960958}
+  - {fileID: 2112887907}
   - {fileID: 1986435065}
   - {fileID: 8885577909540431082}
-  - {fileID: 2112887907}
   - {fileID: 112273087}
   - {fileID: 2538440777434486025}
