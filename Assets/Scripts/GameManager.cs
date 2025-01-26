@@ -33,4 +33,12 @@ public class GameManager : Singleton<GameManager>
         bestScore = playerScore.Max();
         LeaderBoard.Instance.PlayerScoreCheck();
     }
+
+    public void Reset()
+    {
+        playerScore.Clear();
+        isStart = false;
+        isEnd = false;
+        bestScore = 0;
+    }
 }

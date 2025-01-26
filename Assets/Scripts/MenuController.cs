@@ -45,7 +45,7 @@ public class MenuController : MonoBehaviour
 
         if(!GameManager.Instance.isEnd)
         {
-            remainText.text = (GameManager.Instance.bubbleNumber-GameManager.Instance.playerScore.Count).ToString();
+            remainText.text = "Remaining Bubble: " + (GameManager.Instance.bubbleNumber-GameManager.Instance.playerScore.Count).ToString();
         }
         else
         {
@@ -55,9 +55,6 @@ public class MenuController : MonoBehaviour
                 BackToStart();
             }
         }
-
-
-
     }
 
     public void StartGame()
@@ -78,6 +75,10 @@ public class MenuController : MonoBehaviour
     {
         inGamePanelRoot.DOAnchorPosY(-Screen.height, 2f);
         startPanelRoot.DOAnchorPosX(0, 2f);
-        GameManager.Instance.isStart = false;
+        leaderBoardRoot.DOAnchorPosX(Screen.width, 2f);
+        
+        isEnd = false;
+        isStart = false;
+        GameManager.Instance.Reset();
     }
 }
