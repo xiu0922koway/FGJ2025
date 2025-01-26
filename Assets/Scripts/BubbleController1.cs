@@ -7,12 +7,11 @@ using UnityEngine.Experimental.GlobalIllumination;
 using UnityEngine.InputSystem;
 using MoreMountains.Feedbacks;
 
-public class BubbleController1 : MonoBehaviour
+public class BubbleController1 : Singleton<BubbleController1>
 {
     private GameObject bubble;
     private Transform generatePoint;
     public GameObject bubblePrefab;
-    private Transform instructor;
     public PlayerInputAction inputActions;
     public float leftTriggerValue;
     public float rightTriggerValue;
@@ -30,7 +29,7 @@ public class BubbleController1 : MonoBehaviour
     public bool startBlow;
     public bool isBlowing;
 
-    private bool willGenerate;
+    public bool willGenerate;
     private float generateTimer;
     private float generateTime = 3;
     // Start is called before the first frame update
@@ -67,7 +66,6 @@ public class BubbleController1 : MonoBehaviour
 
     void Start()
     {
-        instructor = BubbleInstruction.Instance.instructor;
         generatePoint = this.transform.GetChild(0);
         if(bubble == null) 
         {
@@ -200,6 +198,7 @@ public class BubbleController1 : MonoBehaviour
 
     void BubblePop()
     {
+        Vibration.Instance.TriggerVibration(2f,4f,0.3f);
         Debug.Log("Pop");
         startBlow = false;
         
@@ -211,7 +210,6 @@ public class BubbleController1 : MonoBehaviour
         willGenerate = true;
 
         SoundManager.Instance.PlayClip(1, 2);
-
     }
 
     void BubbleGenerate()
@@ -234,10 +232,11 @@ public class BubbleController1 : MonoBehaviour
         willGenerate = true;
 
         SoundManager.Instance.PlayClip(2, 1);
+        Vibration.Instance.TriggerVibration(0.5f,1,0.1f);
 
     }
 
-    void ResetField()
+    public void ResetField()
     {
         canEnd = false;
         safeBlowTimer = 0;

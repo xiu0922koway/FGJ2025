@@ -17,7 +17,7 @@ namespace Dan.Demo
             _scoreText.text = ((float)entry.Score/100).ToString();
             var dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
             dateTime = dateTime.AddSeconds(entry.Date);
-            _timeText.text = $"{dateTime.Hour:00}:{dateTime.Minute:00}:{dateTime.Second:00} (UTC)\n{dateTime:dd/MM/yyyy}";
+            _timeText.text = $"{dateTime:dd/MM}";
             
             GetComponent<Image>().color = entry.IsMine() ? Color.yellow : Color.white;
         }

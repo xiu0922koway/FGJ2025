@@ -17,6 +17,15 @@ public class Vibration : Singleton<Vibration>
         }
     }
 
+    void Update()
+    {
+        if (gamepad == null)
+        {
+            Debug.Log("gamepad null");
+            gamepad = Gamepad.current;
+        }
+    }
+
     public void TriggerVibration(float lowFrequency, float highFrequency, float duration)
     {
         if (gamepad != null)
@@ -28,6 +37,10 @@ public class Vibration : Singleton<Vibration>
             // 停止震动计时
             Invoke(nameof(StopVibration), duration);
         }
+        else
+        {
+            Debug.Log("gamepad null");
+        }
     }
 
     private void StopVibration()
@@ -36,15 +49,6 @@ public class Vibration : Singleton<Vibration>
         {
             gamepad.SetMotorSpeeds(0f, 0f); // 停止震动
             Debug.Log("Vibration stopped.");
-        }
-    }
-
-    void Update()
-    {
-        // 按下 A 键触发震动（测试用）
-        if (gamepad != null && gamepad.buttonSouth.wasPressedThisFrame)
-        {
-            TriggerVibration(0.5f, 1.0f, 1.0f); // 参数: 低频强度，高频强度，持续时间
         }
     }
 }

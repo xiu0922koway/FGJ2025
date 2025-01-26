@@ -46,5 +46,7 @@ public class GameManager : Singleton<GameManager>
         isStart = false;
         isEnd = false;
         bestScore = 0;
+
+        BubbleController1.Instance.willGenerate = true;
     }
 }

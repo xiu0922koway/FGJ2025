@@ -59,7 +59,7 @@ public class MenuController : MonoBehaviour
 
     public void StartGame()
     {
-        startPanelRoot.DOAnchorPosX(-Screen.width, 2f);
+        startPanelRoot.DOAnchorPosY(Screen.height, 2f);
         inGamePanelRoot.DOAnchorPosY(0, 1f);
         isStart = true;
     }
@@ -74,7 +74,7 @@ public class MenuController : MonoBehaviour
     public void BackToStart()
     {
         inGamePanelRoot.DOAnchorPosY(-Screen.height, 2f);
-        startPanelRoot.DOAnchorPosX(0, 2f);
+        startPanelRoot.DOAnchorPosY(0, 2f);
         leaderBoardRoot.DOAnchorPosX(Screen.width, 2f);
         
         isEnd = false;
