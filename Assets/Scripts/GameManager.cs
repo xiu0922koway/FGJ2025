@@ -10,6 +10,7 @@ public class GameManager : Singleton<GameManager>
     public bool isEnd;
     public int bubbleNumber = 5;
     public List<float> playerScore = new List<float>();
+    public List<GameObject> bubbles = new List<GameObject>();
     public float bestScore;
     // Start is called before the first frame update
     void Start()
@@ -37,6 +38,11 @@ public class GameManager : Singleton<GameManager>
     public void Reset()
     {
         playerScore.Clear();
+        foreach(var bubble in bubbles)
+        {
+            Destroy(bubble);
+        }
+        bubbles.Clear();
         isStart = false;
         isEnd = false;
         bestScore = 0;
