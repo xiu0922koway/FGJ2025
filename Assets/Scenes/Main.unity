@@ -6023,8 +6023,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Blow a bubble to start
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ce695bac1960d7a48ae0e7c857dfa8d5, type: 2}
-  m_sharedMaterial: {fileID: 4793027620872693683, guid: ce695bac1960d7a48ae0e7c857dfa8d5,
+  m_fontAsset: {fileID: 11400000, guid: b29812c1922c85b4a9e66b44e60cae99, type: 2}
+  m_sharedMaterial: {fileID: -8080280342387913867, guid: b29812c1922c85b4a9e66b44e60cae99,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -6302,8 +6302,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3483172084653273012, guid: 86faae4a184f09e4f97658fe8bbe44bf,
         type: 3}
+      propertyPath: m_Size.x
+      value: 10.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3483172084653273012, guid: 86faae4a184f09e4f97658fe8bbe44bf,
+        type: 3}
+      propertyPath: m_Size.y
+      value: 10.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 3483172084653273012, guid: 86faae4a184f09e4f97658fe8bbe44bf,
+        type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5033156879016738701, guid: 86faae4a184f09e4f97658fe8bbe44bf,
         type: 3}
@@ -12098,8 +12108,8 @@ MonoBehaviour:
     Don''t
     Pop the bubble'
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: ce695bac1960d7a48ae0e7c857dfa8d5, type: 2}
-  m_sharedMaterial: {fileID: 4793027620872693683, guid: ce695bac1960d7a48ae0e7c857dfa8d5,
+  m_fontAsset: {fileID: 11400000, guid: b29812c1922c85b4a9e66b44e60cae99, type: 2}
+  m_sharedMaterial: {fileID: -8080280342387913867, guid: b29812c1922c85b4a9e66b44e60cae99,
     type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
@@ -17539,17 +17549,17 @@ PrefabInstance:
     - target: {fileID: 4370894221588461750, guid: 79d50bd79094087448b05036500e0083,
         type: 3}
       propertyPath: maxSpeed
-      value: 0.2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4370894221588461750, guid: 79d50bd79094087448b05036500e0083,
         type: 3}
       propertyPath: blowSpeed
-      value: 0.1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4370894221588461750, guid: 79d50bd79094087448b05036500e0083,
         type: 3}
       propertyPath: slowSpeed
-      value: 2
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 5893930671702791323, guid: 79d50bd79094087448b05036500e0083,
         type: 3}

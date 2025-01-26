@@ -180,7 +180,7 @@ public class BubbleController1 : MonoBehaviour
         sizeDelta = Mathf.Clamp(sizeDelta, 0.1f, 1);
         
         bubble.transform.localScale += Vector3.one * blowDelta * sizeDelta * Time.deltaTime;
-        if(bubble.transform.position.x > 0)bubble.transform.position += Vector3.left * blowDelta * sizeDelta * Time.deltaTime * 40;
+        if(bubble.transform.position.x > 0)bubble.transform.position += Vector3.left * blowDelta * sizeDelta * Time.deltaTime * 2;
     }
 
     void BreatheIn()
@@ -221,7 +221,7 @@ public class BubbleController1 : MonoBehaviour
         }
         else
         {
-            CalculateScore(bubble.transform.localScale.magnitude);
+            CalculateScore(bubble.transform.localScale.x);
         }
 
         bubble = null;
