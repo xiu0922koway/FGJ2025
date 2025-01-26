@@ -14,7 +14,7 @@ namespace Dan.Demo
         {
             _rankText.text = entry.RankSuffix();
             _usernameText.text = entry.Username;
-            _scoreText.text = entry.Score.ToString();
+            _scoreText.text = ((float)entry.Score/100).ToString();
             var dateTime = new System.DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
             dateTime = dateTime.AddSeconds(entry.Date);
             _timeText.text = $"{dateTime.Hour:00}:{dateTime.Minute:00}:{dateTime.Second:00} (UTC)\n{dateTime:dd/MM/yyyy}";

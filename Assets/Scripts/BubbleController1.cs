@@ -197,8 +197,10 @@ public class BubbleController1 : MonoBehaviour
         Destroy(bubble);
         bubble = null;
 
+        CalculateScore(0);
+
         willGenerate = true;
-        CalculateScore();
+
     }
 
     void BubbleGenerate()
@@ -206,10 +208,13 @@ public class BubbleController1 : MonoBehaviour
         Debug.Log("Generate");
         startBlow = false;
         bubble.GetComponent<Bubble>().isGenerated = true;
+
+        CalculateScore(bubble.transform.localScale.magnitude);
+
         bubble = null;
 
         willGenerate = true;
-        CalculateScore();
+
     }
 
     void ResetField()
@@ -219,8 +224,8 @@ public class BubbleController1 : MonoBehaviour
         blowDelta = 0;
     }
 
-    void CalculateScore()
+    void CalculateScore(float number)
     {
-        ScoreManager.Instance.playerScore = bubble.transform.localScale.magnitude;
+        GameManager.Instance.AddScore(number);
     }
 }

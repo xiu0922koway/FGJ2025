@@ -6,10 +6,11 @@ using TMPro;
 // NOTE: Make sure to include the following namespace wherever you want to access Leaderboard Creator methods
 using Dan.Main;
 using Dan.Demo;
+using Unity.VisualScripting;
 
 namespace LeaderboardCreatorDemo
 {
-    public class LeaderBoard : MonoBehaviour
+    public class LeaderBoard : Singleton<LeaderBoard>
     {
         [Header("Gameplay:")]
         [SerializeField] private TextMeshProUGUI _playerScoreText;
@@ -37,6 +38,12 @@ namespace LeaderboardCreatorDemo
         {
             _playerScore++;
             _playerScoreText.text = $"Your score: {_playerScore}";
+        }
+
+        public void PlayerScoreCheck()
+        {
+            _playerScore = (int)Mathf.Round(GameManager.Instance.bestScore * 100);
+            _playerScoreText.text = (Mathf.Round(GameManager.Instance.bestScore * 100)/100).ToString()+"M";
         }
         
         public void Load()
