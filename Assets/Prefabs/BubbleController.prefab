@@ -94,7 +94,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0eeebe59164dde4bb1503e56a59c5bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bubblePrefab: {fileID: 557521030734977017, guid: 39530e144dd1db948a1863055f7176a3,
+  bubblePrefab: {fileID: 1647416122762130660, guid: 86faae4a184f09e4f97658fe8bbe44bf,
     type: 3}
   leftTriggerValue: 0
   rightTriggerValue: 0
