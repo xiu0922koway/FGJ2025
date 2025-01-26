@@ -30,7 +30,7 @@ public class BubbleController1 : MonoBehaviour
 
     private bool willGenerate;
     private float generateTimer;
-    private float generateTime = 2;
+    private float generateTime = 3;
     // Start is called before the first frame update
     void Awake()
     {
@@ -197,8 +197,6 @@ public class BubbleController1 : MonoBehaviour
         Destroy(bubble);
         bubble = null;
 
-        CalculateScore(0);
-
         willGenerate = true;
 
     }
@@ -209,7 +207,14 @@ public class BubbleController1 : MonoBehaviour
         startBlow = false;
         bubble.GetComponent<Bubble>().isGenerated = true;
 
-        CalculateScore(bubble.transform.localScale.magnitude);
+        if(!GameManager.Instance.isStart)
+        {
+            GameManager.Instance.isStart = true;
+        }
+        else
+        {
+            CalculateScore(bubble.transform.localScale.magnitude);
+        }
 
         bubble = null;
 

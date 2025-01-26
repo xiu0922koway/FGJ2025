@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void LateUpdate()
     {
+     
         if(playerScore.Count >= bubbleNumber)
         {
             isEnd = true;

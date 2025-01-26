@@ -46,6 +46,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isStart: 0
   isEnd: 0
-  bubbleNumber: 5
+  bubbleNumber: 3
   playerScore: []
   bestScore: 0
