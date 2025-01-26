@@ -1,4 +1,5 @@
 using UnityEngine;
+using System;
 using System.Collections;
 using Dan.Models;
 using TMPro;
@@ -163,7 +164,13 @@ namespace LeaderboardCreatorDemo
         }
 
         public void Submit()
-        {
+        {       
+            LeaderboardCreator.RequestUserGuid(guid => {
+                string newGuid = Guid.NewGuid().ToString();
+                PlayerPrefs.SetString("LEADERBOARD_CREATOR___LOCAL_GUID", newGuid);
+                PlayerPrefs.Save();
+                
+            });
             Leaderboards.FGJBubbleLeaderBoard.UploadNewEntry(_playerUsernameInput.text, _playerScore, Callback, ErrorCallback);
         }
         
