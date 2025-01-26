@@ -76,7 +76,7 @@ public class BubbleController1 : MonoBehaviour
         }
     }
 
-    private float safeBlowTime = 0.5f;
+    private float safeBlowTime = 0.25f;
     private float safeBlowTimer;
     private bool canEnd;
     void Update()
@@ -182,7 +182,7 @@ public class BubbleController1 : MonoBehaviour
         sizeDelta = Mathf.Clamp(sizeDelta, 0.1f, 1);
         
         bubble.transform.localScale += Vector3.one * blowDelta * sizeDelta * Time.deltaTime;
-        if(bubble.transform.position.x >= 0)bubble.transform.position += Vector3.left * blowDelta * sizeDelta * Time.deltaTime * 2;
+        //if(bubble.transform.position.x >= 0)bubble.transform.position += Vector3.left * blowDelta * sizeDelta * Time.deltaTime * 2;
     }
 
     void BreatheIn()
