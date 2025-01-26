@@ -9,6 +9,7 @@ using UnityEngine.InputSystem;
 public class BubbleController1 : MonoBehaviour
 {
     private GameObject bubble;
+    private Transform generatePoint;
     public GameObject bubblePrefab;
     private Transform instructor;
     public PlayerInputAction inputActions;
@@ -30,7 +31,7 @@ public class BubbleController1 : MonoBehaviour
 
     private bool willGenerate;
     private float generateTimer;
-    private float generateTime = 2;
+    private float generateTime = 3;
     // Start is called before the first frame update
     void Awake()
     {
@@ -66,13 +67,15 @@ public class BubbleController1 : MonoBehaviour
     void Start()
     {
         instructor = BubbleInstruction.Instance.instructor;
+        generatePoint = this.transform.GetChild(0);
         if(bubble == null) 
         {
-            bubble = Instantiate(bubblePrefab,Vector3.zero,Quaternion.identity);
+            bubble = Instantiate(bubblePrefab,generatePoint.position,Quaternion.identity, generatePoint);
+            GameManager.Instance.bubbles.Add(bubble);
         }
     }
 
-    private float safeBlowTime = 1;
+    private float safeBlowTime = 2;
     private float safeBlowTimer;
     private bool canEnd;
     void Update()
@@ -86,7 +89,9 @@ public class BubbleController1 : MonoBehaviour
             else
             {
                 generateTimer = 0;
-                bubble = Instantiate(bubblePrefab,Vector3.zero,Quaternion.identity);
+                bubble = Instantiate(bubblePrefab,generatePoint.position,Quaternion.identity, generatePoint);
+                GameManager.Instance.bubbles.Add(bubble);
+
                 willGenerate = false;
                 ResetField();
             }
@@ -175,6 +180,7 @@ public class BubbleController1 : MonoBehaviour
         sizeDelta = Mathf.Clamp(sizeDelta, 0.1f, 1);
         
         bubble.transform.localScale += Vector3.one * blowDelta * sizeDelta * Time.deltaTime;
+        if(bubble.transform.position.x > 0)bubble.transform.position += Vector3.left * blowDelta * sizeDelta * Time.deltaTime * 40;
     }
 
     void BreatheIn()
@@ -182,7 +188,7 @@ public class BubbleController1 : MonoBehaviour
         Debug.Log("BREATHIN");
         
         blowDelta -= slowSpeed * Time.deltaTime;
-        blowDelta = Mathf.Clamp(blowDelta, -0.01f * maxSpeed, maxSpeed);
+        blowDelta = Mathf.Clamp(blowDelta, -0.005f * maxSpeed, maxSpeed);
 
         sizeDelta = sizeMultiplier / Mathf.Pow(bubble.transform.localScale.x,1.5f);
         sizeDelta = Mathf.Clamp(sizeDelta, 0.1f, 1);
@@ -194,10 +200,10 @@ public class BubbleController1 : MonoBehaviour
     {
         Debug.Log("Pop");
         startBlow = false;
-        Destroy(bubble);
+        
+        bubble.GetComponent<Animator>().SetTrigger("Brust");
+        //Destroy(bubble);
         bubble = null;
-
-        CalculateScore(0);
 
         willGenerate = true;
 
@@ -209,7 +215,14 @@ public class BubbleController1 : MonoBehaviour
         startBlow = false;
         bubble.GetComponent<Bubble>().isGenerated = true;
 
-        CalculateScore(bubble.transform.localScale.magnitude);
+        if(!GameManager.Instance.isStart)
+        {
+            GameManager.Instance.isStart = true;
+        }
+        else
+        {
+            CalculateScore(bubble.transform.localScale.magnitude);
+        }
 
         bubble = null;
 
