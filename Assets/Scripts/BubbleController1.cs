@@ -92,6 +92,7 @@ public class BubbleController1 : MonoBehaviour
                 generateTimer = 0;
                 bubble = Instantiate(bubblePrefab,generatePoint.position,Quaternion.identity, generatePoint);
                 GameManager.Instance.bubbles.Add(bubble);
+                SoundManager.Instance.PlayClip(0, 0.3f);
 
                 willGenerate = false;
                 ResetField();
@@ -191,7 +192,7 @@ public class BubbleController1 : MonoBehaviour
         blowDelta -= slowSpeed * Time.deltaTime;
         blowDelta = Mathf.Clamp(blowDelta, -0.005f * maxSpeed, maxSpeed);
 
-        sizeDelta = sizeMultiplier / Mathf.Pow(bubble.transform.localScale.x,1.5f);
+        sizeDelta = sizeMultiplier / Mathf.Pow(bubble.transform.localScale.x,1f);
         sizeDelta = Mathf.Clamp(sizeDelta, 0.1f, 1);
 
         bubble.transform.localScale += Vector3.one * blowDelta * sizeDelta * Time.deltaTime;
@@ -208,6 +209,8 @@ public class BubbleController1 : MonoBehaviour
         bubble = null;
 
         willGenerate = true;
+
+        SoundManager.Instance.PlayClip(1, 2);
 
     }
 
@@ -229,6 +232,8 @@ public class BubbleController1 : MonoBehaviour
         bubble = null;
 
         willGenerate = true;
+
+        SoundManager.Instance.PlayClip(2, 1);
 
     }
 
