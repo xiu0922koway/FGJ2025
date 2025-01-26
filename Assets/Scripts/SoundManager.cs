@@ -7,6 +7,7 @@ public class SoundManager : Singleton<SoundManager>
 {
     // Start is called before the first frame update
     public List<AudioClip> audioClips;
+    public List<AudioClip> bgms;
     void Start()
     {
         
